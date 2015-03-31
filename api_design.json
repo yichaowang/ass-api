@@ -1,0 +1,130 @@
+/*
+  需要在PHP端支持一下jsonp格式。这样我们可以在测试服务器上测试。参见：
+  http://www.kaijia.me/2012/08/php-simple-modify-support-jsonp/
+
+  谢谢！
+*/
+
+/* 
+  产品列表 /api/product 
+  参数： 
+    limit       optional        返回产品的数量 默认:20     ex./?limit=10
+
+    offset      optional        返回的第一个产品的Id 默认:最新项目的ID ex./?offset=a7aa827f070796fe94
+
+    category    optional        分类的ID       默认:无     ex./?category=1  
+                                    分类码: 1-女装 2-裙装 3-外套 4-上衣 5-裤装
+                                    6-配饰 7-围巾 8-包 9-首饰 （如果有现有的可以商量更改）
+
+    size        optional        尺码过滤       默认:无    ex./?size=xs,s,m,l
+
+    color       optional        颜色过滤       默认:无    ex./?color=black,white,red,pink,blue,
+                                                            naked,gold,gray,purple,green,brown,yellow 
+
+    sort        optional        排序           默认:无    ex./sort=voldesc
+                                    排序码: voldesc-销量高到低, timedesc-时间最近到最久,
+                                            pricedesc-价格高到低, priceasc-价格低到高
+
+    collection_id   optional    系列ID（设计师系列）默认:无    ex./collection_id=4f3f41a1f055cc12fcca62b23a9fbffc3044fb6c
+                                    系列是2列的产品列表。
+
+    cover_id        optional    封面ID (每周封面)   默认:无    ex./cover_id=4f3f41a1f079cc12fcca62b23a9fbffc3044fb6c
+                                    封面是像微信订阅号信息的一个图文的页面
+*/
+
+{
+  "products": [
+    {
+      "id": "a7aa827f070796fe940d85d6afe45e4541d9f97e",
+      "product_id": "LWV14016", //货号
+      "name": "连衣裙",
+      "collection": "SWING BACK",  //系列名
+      "collection_id": "4f3f41a1f055cc12fcca62b23a9fbffc3044fb6c",  //系列ID
+      "cover_id": ["4f3f41a1f055cc12fcca62b23a9fbffc3044fb6c", "b23a9fbffc3044fb6c4f3f41a1f055cc12fcca62"],  //封面ID 一个产品可能属于多个封面
+      "thumbnail_url": "http://img.anyshopstyle.com/upload/image/2015/03/25/1427263683.jpg", //缩略图
+      "profile_name": "SHAFEI HAN 韩莎菲", //设计师名字
+      "profile_img_url": "/images/designers/huttionn.jpg", //设计师头像图
+      "price": "3680",
+      "color": ["black", "white"],
+      "size": ["XS", "S", "M", "L"],
+      "size_chart_id": "shafei-han", //尺码表，再讨论是id, html, 还是图片
+      "description": "无论是职场还是休闲出街，你一定十分需要一件既独树一帜又百搭简洁的西装外套，象灰色的色调可以搭配各种下装又不失本色", //商品描述
+      "material": "100%棉", //面料
+      "images": [
+        {"url": "http://img.anyshopstyle.com/upload/image/2015/03/25/1427263683.jpg"}, //第一张图一定是缩略图的放大版，不知道我们现在有吗
+        {"url": "http://img.anyshopstyle.com/upload/image/2015/03/25/1427267793.jpg", "color":"black"}, //一个颜色只能对应一张图
+        {"url": "http://img.anyshopstyle.com/upload/image/2015/03/25/1427270491.jpg", "color":"white"},
+        {"url": "http://img.anyshopstyle.com/upload/image/2015/03/25/1427264927.jpg"}
+      ]
+    },
+    {
+      "id": "a7aa827f070796fe940d85d6afe45e4541d9f97e",
+      "product_id": "LWV14016", //货号
+      "name": "连衣裙",
+      "collection": "SWING BACK",  //系列名
+      "collection_id": "4f3f41a1f055cc12fcca62b23a9fbffc3044fb6c",  //系列ID
+      "cover_id": ["4f3f41a1f055cc12fcca62b23a9fbffc3044fb6c", "b23a9fbffc3044fb6c4f3f41a1f055cc12fcca62"],  //封面ID 一个产品可能属于多个封面
+      "thumbnail_url": "http://img.anyshopstyle.com/upload/image/2015/03/25/1427263683.jpg", //缩略图
+      "profile_name": "SHAFEI HAN 韩莎菲", //设计师名字
+      "profile_img_url": "/images/designers/huttionn.jpg", //设计师头像图
+      "price": "3680",
+      "color": ["black", "white"],
+      "size": ["XS", "S", "M", "L"],
+      "size_chart_id": "shafei-han", //尺码表，再讨论是id, html, 还是图片
+      "description": "无论是职场还是休闲出街，你一定十分需要一件既独树一帜又百搭简洁的西装外套，象灰色的色调可以搭配各种下装又不失本色", //商品描述
+      "material": "100%棉", //面料
+      "images": [
+        {"url": "http://img.anyshopstyle.com/upload/image/2015/03/25/1427263683.jpg"}, //第一张图一定是缩略图的放大版，不知道我们现在有吗
+        {"url": "http://img.anyshopstyle.com/upload/image/2015/03/25/1427267793.jpg", "color":"black"}, //一个颜色只能对应一张图
+        {"url": "http://img.anyshopstyle.com/upload/image/2015/03/25/1427270491.jpg", "color":"white"},
+        {"url": "http://img.anyshopstyle.com/upload/image/2015/03/25/1427264927.jpg"}
+      ]
+    }
+  ],
+
+  "pagination": {
+    "next": "c78b4296258972bdcc8fd29d6d8383aa2f4d1d05" //分页信息，下一个产品的id，如果没有下一个产品返回 false eg.{"next": false}
+  }
+}
+
+/*
+  主页的系列和封面: /api/home
+  主页项目有两种：系列或封面。系列是2列的产品列表。封面是像微信订阅号信息的一个图文的页面。
+  见182.92.237.201. 主要内容就是4-5个图片，标题和链接
+*/
+
+{
+  "home": [
+    {
+      "id": "4d3ad203bc14e3aa37875188c0ad02fb4c4cf1f6",
+      "type": "collection", // 系列或封面
+      "title":"新款：Yesir / 新春系列",
+      "img_url": "http://img.anyshopstyle.com/upload/images/home/home_1.jpg"
+    },
+    {
+      "id": "1587d09516d1ec525e640daf7eecd24b18cd4a40",
+      "type": "cover",
+      "title":"新款：BAIPENG / 15春秋",
+      "img_url": "http://img.anyshopstyle.com/upload/images/home/home_2.jpg"
+    },
+    {
+      "id": "5af6addacc04d6765d471eb0396be02b030331d5",
+      "type": "collection",
+      "title":"新款：ALIAS / 14秋冬",
+      "img_url": "http://img.anyshopstyle.com/upload/images/home/home_3.jpg"
+    },
+    {
+      "id": "4e75c2c3f5551b6550f8d596d3b8d2c5a1c4df83",
+      "type": "cover",
+      "title":"新款：LIULU / 14 Collection",
+      "img_url": "http://img.anyshopstyle.com/upload/images/home/home_4.jpg"
+    }
+  ] 
+}
+
+
+
+
+
+
+
